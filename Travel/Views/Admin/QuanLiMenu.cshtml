@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Quản lí Menu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model PagedList.IPagedList<Travel.Models.DTO.MenuDTO>
+@using PagedList.Mvc;
+<h3>Danh sách menu</h3>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemMenu">Thêm menu mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <table class="table">
+        <tr>
+            <th class="col-md-1">
+                @Html.DisplayName("Mã Menu")
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayName("Tên Menu")
+            </th>
+            <th class="col-md-4">
+                @Html.DisplayName("Nội dung")
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayName("Menu cha")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.idMenu)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.TenMenu)
+            </td>
+            <td class="col-md-4">
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.TenMenuCha)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "SuaMenu", new { id = item.idMenu })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "XoaMenu", new { id = item.idMenu }, new { onclick = "return ConfirmationDialog()" })
+            </td>
+        </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("QuanLiMenu", new { page, @searchString = @ViewBag.SearchString }))
+
+    <div style="text-align:justify">&nbsp;</div>
+

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = Model.TenND;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div style="max-width:1100px;margin: 0 auto;">
+        @Html.Action("LeftMenu")
+        <div class="col-lg-9 col-md-9">
+            <div itemscope="" itemtype="">
+                <h2 itemprop="name" class="heading">Khách sạn</h2>
+                <div class="main-box">
+                    <h1 class="title">@Model.TenND</h1>
+                    <div class="hotel-info">
+                        <div class="price"><p>Giá từ: <span>@String.Format("{0:0,0 VNĐ}", Model.Gia)</span></p></div>
+                        <div><p><span class="address">Địa chỉ:</span>@Model.DiaChi</p></div>
+                    </div>
+                    <h2 class="introtext" style="font-size:14px;">
+                        @Html.Raw(Model.NoiDung)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

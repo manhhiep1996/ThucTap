@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "QUẢN LÍ XE U LỊCH";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model PagedList.IPagedList<Travel.Models.DTO.MenuContentDTO>
+@using PagedList.Mvc;
+<h3>DANH SÁCH XE ĐU LỊCH</h3>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemNdMenu?view=ThemXe">Thêm xe mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-1"></th>
+        <th class="col-md-1">
+            @Html.DisplayName("Mã xe")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Tên xe")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Giá")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Nhãn hiệu")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Menu")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.TenMenu == "Thuê xe")
+        {
+            <tr>
+                <td class="col-md-1">
+                    <img src="@item.Anh" style="width:120px;height:80px;" />
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.idND)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.TenND)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Gia)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.NhanHieu)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.TenMenu)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "SuaNdMenu", new { id = item.idND, view = "SuaXe" })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "DeleteContent", new { id = item.idND }, new { onclick = "return ConfirmationDialog()" })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("QuanLiNdMenu", new { page, view = "QuanLiThueXe", @searchString = @ViewBag.SearchString }))
+
+<div style="text-align:justify">&nbsp;</div>
+

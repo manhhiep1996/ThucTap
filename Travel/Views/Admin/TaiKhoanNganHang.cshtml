@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Tài khoản ngân hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model IEnumerable<Travel.Models.Entities.TaiKhoanNH>
+<h2>Danh sách tài khoản</h2>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemTaiKhoan">Thêm tài khoản mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-2">
+            @Html.DisplayName("Mã TK")
+        </th>
+        <th class="col-md-4">
+            @Html.DisplayName("Tên TK")
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayName("Tên ngân hàng")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.MaTK)
+            </td>
+            <td class="col-md-4">
+                @Html.DisplayFor(modelItem => item.TenTK)
+            </td>
+            <td class="col-md-3">
+                @Html.DisplayFor(modelItem => item.TenNganHang)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "SuaTaiKhoan", new { id = item.MaTK })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "XoaTaiKhoan", new { id = item.MaTK }, new { onclick = "return ConfirmationDialog()" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="text-align:justify">&nbsp;</div>
+

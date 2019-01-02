@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title> Thông tin đơn hàng mới từ khách hàng: {{CustomerName}}</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div style="font-weight:bold;font-size:17px;border-bottom:1px dashed #d1d1d1;padding:5px 0px;margin-bottom:10px;clear:both;">Đơn hàng đặt Tour</div>
+    <table class="m_-1933040110589799410tbltour" cellpadding="1" cellspacing="2" style="font-size:12px">
+        <tbody>
+            <tr>
+                <td width="110" style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Tour:</td>
+                <td valign="top">{{TourName}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Thời gian:</td>
+                <td valign="top">{{Days}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Ngày khởi hành:</td>
+                <td valign="top">{{DepartureDay}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Điểm khởi hành:</td>
+                <td valign="top">{{Departure}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Phương tiện:</td>
+                <td valign="top">{{Vehicle}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;color:blue;padding:2px 5px" valign="top">Lịch trình:</td>
+                <td valign="top">{{Schedule}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="font-weight:bold;font-size:17px;border-bottom:1px dashed #d1d1d1;padding:5px 0px;margin-bottom:10px;clear:both;">Thông tin đặt Tour</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px">
+        <tbody>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Tổng số khách:</td>
+                <td>
+                    {{Adults}}&nbsp;&nbsp;&nbsp;{{Childrens}}&nbsp;&nbsp;&nbsp;{{Babys}}
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Tổng thanh toán:</td>
+                <td><span style="font-size:17px;font-weight:bold;color:#ff0000">{{Total}}</span> vnđ</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Thanh toán</td>
+                <td>
+                    {{Payment}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="font-weight:bold;font-size:17px;border-bottom:1px dashed #d1d1d1;padding:5px 0px;margin-bottom:10px;clear:both;">Thông tin khách hàng</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px">
+        <tbody>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Họ tên:</td>
+                <td>{{CustomerName}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Địa chỉ:</td>
+                <td>{{Address}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Điện thoại:</td>
+                <td>{{Phone}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120">Email:</td>
+                <td>{{Email}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120" valign="top">Điểm đón:</td>
+                <td valign="top">{{Pickup}}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;padding:2px 5px" width="120" valign="top">Ghi chú:</td>
+                <td valign="top">{{Note}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

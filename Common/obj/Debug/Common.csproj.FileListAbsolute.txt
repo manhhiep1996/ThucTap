@@ -1,0 +1,6 @@
+C:\Users\NguyenHiep\source\repos\Travel\Common\bin\Debug\Common.dll
+C:\Users\NguyenHiep\source\repos\Travel\Common\bin\Debug\Common.pdb
+C:\Users\NguyenHiep\source\repos\Travel\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\NguyenHiep\source\repos\Travel\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\NguyenHiep\source\repos\Travel\Common\obj\Debug\Common.dll
+C:\Users\NguyenHiep\source\repos\Travel\Common\obj\Debug\Common.pdb

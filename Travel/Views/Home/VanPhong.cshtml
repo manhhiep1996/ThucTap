@@ -1,0 +1,46 @@
+﻿<div class="col-lg-12 col-md-8" align="left">
+    <p style="text-align:justify">
+        <strong>Công ty TNHH </strong>
+    </p>
+    @foreach (var item in Model)
+    {
+        <div style="text-align:justify">&nbsp;</div>
+        <div style="text-align:justify">
+            <span style="color:#f06e00;"><strong>@item.TenVP:</strong></span>
+        </div>
+        <div style="text-align:justify">
+            <strong>
+                <img src="~/Content/Picture/icon-dia-diem.png" style="height:20px; width:20px" />
+                Địa chỉ:
+            </strong>
+            <span style="font-size: 12px;">
+                @item.DiaChi;
+            </span>
+        </div>
+        <div style="text-align:justify">
+            <strong>
+                <img src="~/Content/Picture/icon-hotline-tuan-nguyen-travel.png" style="height:20px; width:20px" />
+                Điện thoại:
+            </strong>
+            <span style="font-size: 12px;">
+                @item.SDT
+            </span>
+        </div>
+        <div style="text-align:justify">
+            <strong>
+                <img src="~/Content/Picture/icon-email-tuan-nguyen-travel.png" style="height:20px; width:20px" />
+                Email:
+            </strong>
+            <span style="font-size: 12px;">
+                @item.Email
+            </span>
+        </div>
+    }
+    <div style="text-align:justify">&nbsp;</div>
+    <div>
+        <strong>
+            Website:<span style="color:#337ab7">www.tuannguyentravel.com</span> - Hotline: <span style="color:#337ab7"> 0972 595 693 - 0973 023 878</span> - Skype: <span style="color:#337ab7">nguyenphuongthu102</span>
+        </strong>
+
+    </div>
+</div>

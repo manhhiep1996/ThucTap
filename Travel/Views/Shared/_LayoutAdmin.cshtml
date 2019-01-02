@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="~/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <link href="~/Content/sb-admin-2.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <title>Quản Trị</title>
+    <script>
+        function ConfirmationDialog() {
+            if (confirm("Bạn có thực sự muốn xóa?"))
+                return true;
+            else
+                return false;
+        }
+        function confirmEdit() {
+            if (confirm("Bạn muốn sửa bản ghi này?"))
+                return true;
+            else
+                return false;
+        }
+        function confirmPayment() {
+            if (confirm("Bạn muốn xác nhận đơn hàng này đã thanh toán?"))
+                return true;
+            else
+                return false;
+        }
+
+    </script>
+    <style>
+        .tab-box ul.listtab {
+            position: relative;
+            padding-left: 0px;
+            margin-top: 15px;
+            margin-bottom: -2px;
+            border-bottom: 2px solid #56aaff;
+        }
+
+        .tab-box > ul.listtab li.active {
+            background: #56aaff;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .tab-box > ul.listtab li {
+            display: inline-block;
+            padding: 10px 20px 10px 20px;
+            font: 14px Tahoma;
+            color: #56aaff;
+            margin-right: 1px;
+            text-transform: uppercase;
+            border-bottom: none !important;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 5px;
+            border-radius: 7px 7px 0 0;
+            background: #f8f8f8;
+            border: 1px solid #eee;
+        }
+
+        .tabcon {
+            display: none;
+            padding: 15px 0 15px 0;
+            line-height: 25px;
+        }
+
+            .tabcon table {
+                width: 100% !important;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Quản Trị</a>
+            </div>
+
+            <div class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a href="/Admin/Logout"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a>
+                </li>
+            </div>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/Admin/Admin"><span style="width:16px;"><i class="fa fa-dashboard fa-fw"></i></span> Tổng quan</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiTour"><span style="width:16px;"><i class="fa fa-car" style="min-width:16px;"></i></span> Quản lí tour</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiMenu"><span style="width:16px;"><i class="fa fa-tasks" style="min-width:16px;"></i></span> Quản lí menu</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiNhanVien"><span style="width:16px;"><i class="fa fa-user" style="min-width:16px;"></i></span> Quản lí nhân viên</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiNdMenu?view=QuanLiKhachSan"><span style="width:16px;"><i class="fa fa-hospital-o" style="min-width:16px;"></i></span> Khách sạn</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiNdMenu?view=QuanLiKhachHang"><span style="width:16px;"><i class="fa fa-user" style="min-width:16px;"></i></span> Hình ảnh khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiNdMenu?view=QuanLiTinTuc"><span style="width:16px;"><i class="fa fa-newspaper-o" style="min-width:16px;"></i></span> Tin tức</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiNdMenu?view=QuanLiThueXe"><span style="width:16px;"><i class="fa fa-motorcycle" style="min-width:16px;"></i></span> Thuê xe</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/QuanLiVanPhong"><span style="width:16px;"><i class="fa fa-home" style="min-width:16px;"></i></span> Văn phòng</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/TaiKhoanNganHang"><span style="width:16px;"><i class="fa fa-user" style="min-width:16px;"></i></span> Tài khoản ngân hàng</a>
+                        </li>
+                        @*<li>
+                            <a href="/Admin/QuanLiDatTour"><span style="width:16px;"><i class="fa fa-edit fa-fw" style="min-width:16px;"></i></span> Đặt tour</a>
+                        </li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row" style="min-height:480px">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".listtab li").click(function () {
+            var data_id = $(this).attr('data_id');
+            $(".listtab li").removeClass('active');
+            $(this).addClass('active');
+            $(".tabcon").hide();
+            $("#" + data_id).show();
+        });
+        function back(){
+            history.back();
+        }
+    </script>
+</body>
+
+</html>

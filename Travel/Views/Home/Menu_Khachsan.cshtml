@@ -1,0 +1,23 @@
+﻿<div class="main">
+    <div style="max-width:1100px;margin: 0 auto;">
+        @{ Html.RenderPartial("LeftMenu");}
+        <div class="col-lg-9 col-md-9">
+            <h2 class="heading">Khách sạn</h2>
+            <div class="width100">
+                @foreach (var item in Model.ListContentId)
+                {
+                    <div class="hotel-box">
+                        <div style="" class="hotel-img col-lg-3 col-md-3 col-sm-3 col-xs-12"><a href="http://localhost:53953/Home/DetailHotel?id=@item.idND"><img alt=@item.TenND src=@item.Anh width="100%"></a></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <h3 style="font-size: 1.2em;font-weight: bold;margin-bottom: 5px;"><a href="http://localhost:53953/Home/DetailHotel?id=@item.idND" title=@item.TenND>@item.TenND</a></h3>
+                            <div style="color: #337ab7;font-weight: bold;">Giá từ: <span style="color: red">@item.Gia VNĐ</span></div>
+                            <div><span style="color: #337ab7;font-weight: bold;">Địa chỉ:</span> @item.DiaChi</div>
+                            <div class="pull-right"><a href="http://localhost:53953/Home/DetailHotel?id=@item.idND" style="color: #f06e00;">Chi tiết...</a></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

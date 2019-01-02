@@ -1,0 +1,215 @@
+﻿@model Travel.Models.Entities.Tour
+
+@{
+    ViewBag.Title = "Thêm tour mới";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Thêm mới tour</h2>
+
+@using (Html.BeginForm("AddTour", "Admin"))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Điền thông tin</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Tên tour")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.TenTour, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenTour, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Phương tiện")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.PhuongTien, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PhuongTien, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Số ngày đi")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.ThoiGian, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ThoiGian, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Ngày khởi hành")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.NgayKhoiHanh, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NgayKhoiHanh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Nơi khởi hành")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.NoiKhoiHanh, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NoiKhoiHanh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Giá chung")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Khuyến mãi")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.KhuyenMai, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.KhuyenMai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Giá người lớn")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.GiaNL, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GiaNL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Giá trẻ em")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.GiaTE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GiaTE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Giá em bé")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.GiaEB, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GiaEB, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Menu")
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.idMenu, null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idMenu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Lịch trình")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.LichTrinh, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LichTrinh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Hình thức")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.HinhThuc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HinhThuc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Số người tối đa")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.SoNguoi, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0" } })
+            @Html.ValidationMessageFor(model => model.SoNguoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Loại tour")
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.TourHot, new List<SelectListItem>
+                        {
+                                            new SelectListItem() {Text = "Không", Value="0"},
+                                            new SelectListItem() {Text = "Tour hot", Value="1"},
+                        }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TourHot, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Mô tả")
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.MoTa, new { @id = "ckeTD" })
+            <script type="text/javascript">
+                CKEDITOR.replace("ckeTD");
+            </script>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Giới thiệu tour")
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.GioiThieuTour, new { @id = "ckeGTT" })
+            <script type="text/javascript">
+                CKEDITOR.replace("ckeGTT");
+            </script>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Lịch trình chi tiết")
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.LichTrinhCT, new { @id = "ckeLTCT" })
+            <script type="text/javascript">
+                CKEDITOR.replace("ckeLTCT");
+            </script>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.Label("Ảnh")
+        </div>
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @type = "file", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "QuanLiTour")
+</div>
+<div style="text-align:justify">&nbsp;</div>

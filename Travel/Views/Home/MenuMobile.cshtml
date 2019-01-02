@@ -1,0 +1,39 @@
+﻿
+<nav id="menu-mobile" class="hidden">
+    <ul>
+        @foreach (var item in Model)
+        {
+            if (item.idMenuCha == 1003)
+            {
+                int i = 0;
+                foreach (var items in Model)
+                {
+                    if (items.idMenuCha == item.idMenu)
+                    {
+                        i = 1;
+                        break;
+                    }
+                }
+                if (i == 0)
+                {
+                    <li><a href="http://localhost:53953/Home/Index?id=@item.idMenu">@item.TenMenu</a></li>
+                }
+                if (i == 1)
+                {
+                    <li class="has-children">
+                        <a href="http://localhost:53953/Home/Index?id=@item.idMenu">@item.TenMenu</a>
+                        <ul class="child count-nav-3">
+                            @foreach (var items in Model)
+                            {
+                                if (items.idMenuCha == item.idMenu)
+                                {
+                                    <li><a href="http://localhost:53953/Home/Index?id=@items.idMenu">@items.TenMenu</a></li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        }
+    </ul>
+</nav>

@@ -1,0 +1,33 @@
+﻿@*@model IEnumerable<Travel.Models.DTO.TourDTO>*@
+@foreach(var item in Model)
+{
+    <div class="col-lg-12">
+        <div class="tourhot">
+            <div class="hot-trick">
+                <blink>Hot</blink>
+            </div>
+            <a title="" href="http://localhost:53953/Home/DetailTour?id=@item.idTour">
+                <figure class="tourhotpic">
+                    <img alt="@item.TenTour" src=@item.Anh />
+                </figure>
+                <div class="col-lg-12">
+                    <h3 class="title">@item.TenTour</h3>
+                </div>
+                <div class="infotour">
+                    <div class="date">@item.ThoiGian</div>
+                    <div class="price">
+                        @if (item.GiaNL < item.Gia)
+                        {
+                        <span class="old-price">@String.Format("{0:0,0 đ}", item.Gia)</span>
+                        }
+                        else
+                        {
+                            <span>&nbsp;</span>
+                        }
+                        @String.Format("{0:0,0 đ}", item.GiaNL)
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+}

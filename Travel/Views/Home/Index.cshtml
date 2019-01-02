@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{if (ViewBag.type == 1 || ViewBag.type == null)
+    {
+        <div class="width100">
+            <div style="max-width:800px;margin: 0 auto;padding: 20px 0;">
+                <div class="search-box">
+                    @using (Html.BeginForm("SearchAction", "Home", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="col-md-4 col-sm-4 col-xs-12" style="padding-left:0;">
+                            <input type="text" name="searchString" class="form-control" placeholder="Nhập Điểm đến, Tên Tour, Mã Tour" />
+                        </div>
+                        <div class="col-md-3 col-sm-3" style="padding-left:0;">
+                            <select class="form-control" name="ngaydi">
+                                <option value="0">Số ngày đi tour</option>
+                                <option value="1 ngày">1 ngày</option> 
+                                <option value="2 ngày 1 đêm">2 ngày 1 đêm</option>
+                                <option value="3 ngày 2 đêm">3 ngày 2 đêm</option>
+                                <option value="4 ngày 3 đêm">4 ngày 3 đêm</option>
+                                <option value="5 ngày 4 đêm">5 ngày 4 đêm</option>
+                                <option value="6 ngày 5 đêm">6 ngày 5 đêm</option>
+                                <option value="7 ngày 6 đêm">7 ngày 6 đêm</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12" style="padding-left:0;">
+                            <select class="form-control" name="gia">
+                                <option value="0">Giá</option>
+                                <option value="1000000">Từ 0 đến 1 triệu</option>
+                                <option value="2000000">Từ 1 đến 2 triệu</option>
+                                <option value="3000000">Từ 2 đến 3 triệu</option>
+                                <option value="4000000">Từ 3 đến 4 triệu</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12" style="padding-left:0;">
+                            <input name="submit" type="submit" class="btn_search" value="Tìm kiếm" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="width100" style="padding:0 0 20px 0; background:#f5f5f5">
+            <h2 class="heading-home">
+                Chùm tour nổi bật
+            </h2>
+            <div style="max-width:1100px;margin:0 auto;clear: both;">
+                <div id="owl992" class="owl-carousel owl-theme carousel slide" data-ride="carousel">
+                    @Html.Action("TourHot")
+                </div>
+                <div id="owl768" class="owl-carousel owl-theme carousel slide" data-ride="carousel">
+                    @Html.Action("TourHot")
+                </div>
+                <div id="owl576" class="owl-carousel owl-theme carousel slide" data-ride="carousel">
+                    @Html.Action("TourHot")
+                </div>
+            </div>
+
+        </div>
+        int a = 0;
+
+        foreach (var menu in Model.ListMenu)
+        {
+            if (menu.TenMenu == "Tour miền Bắc" || menu.TenMenu == "Tour miền Trung" || menu.TenMenu == "Tour miền Nam")
+            {
+                var str = "";
+                if (a % 2 == 1)
+                {
+                    str = "background:#f5f5f5";
+                }
+        <div class="width100" style="@str">
+            <div class="tour-list">
+                <div style="max-width:1100px;margin:0 auto;clear: both;">
+                    <h2 class="heading-home"><a href="#"> @menu.TenMenu</a></h2>
+                    <div class="heading-home">
+                        <p>@Html.Raw(menu.NoiDung)</p>
+                    </div>
+
+                    <div class="main">
+                        @{
+                            int i = 0;
+                            foreach (var tour in Model.ListTour)
+                            {
+                                foreach (var menu2 in Model.ListMenu)
+                                {
+                                    if (menu2.TenMenuCha == menu.TenMenu && tour.TenMenu == menu2.TenMenu && i < 8)
+                                    {
+                                        i++;
+                                        <!--tour List-->
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                                            <div class="tour-box">
+                                                <div class="tour-img">
+                                                    <a title=@tour.TenTour href="http://localhost:53953/Home/DetailTour?id=@tour.idTour"><img src=@tour.Anh alt=""></a>
+                                                </div>
+                                                <div class="tour-info">
+                                                    <h4><a id="tour_50" title=@tour.TenTour href="http://localhost:53953/Home/DetailTour?id=@tour.idTour">@tour.TenTour</a></h4>
+                                                    <div class="price">
+                                                        <div class="pull-left">Giá: @String.Format("{0:0,0 VNĐ}", tour.Gia)</div>
+                                                        <div class="pull-right"><a class="read-more" href="http://localhost:53953/Home/DetailTour?id=@tour.idTour">Chi tiết</a></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--End tour List-->
+                                    }
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+            a++;
+        }
+    }
+    }
+    else
+    {
+        string viewname = ViewBag.ViewName;
+            Html.RenderPartial(viewname);
+            
+    }
+}
+<style>
+</style>

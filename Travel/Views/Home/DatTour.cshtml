@@ -1,0 +1,350 @@
+﻿
+@{
+    ViewBag.Title = "Đặt Tour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div style="max-width:1100px;margin: 0 auto;">
+        @Html.Action("LeftMenu")
+        <div class="col-lg-9 col-md-9">
+            <h2 class="heading">Đặt Tour: @Model.TenTour</h2>
+            <div class="main-box">
+                <div class="tourInfo">
+                    <h2 class="title">@Html.Raw(Model.TieuDe)</h2>
+                    <div class="tour-img col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <img src=@Model.Anh>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <div class="g-r">Mã Tour: @Model.idTour</div>
+                        <div class="g-r">Thời gian: @Model.ThoiGian</div>
+                        <div class="g-r">Khởi hành từ: @Model.NoiKhoiHanh</div>
+                        <div class="g-r">Lịch trình: @Model.LichTrinh</div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <div class="g-r">Hình thức: @Model.HinhThuc</div>
+                        <div class="g-r">Phương tiện: @Model.PhuongTien</div>
+                        <div class="g-r">Ngày khởi hành: @Model.NgayKhoiHanh</div>
+                        <div class="g-r">Giá: <span class="tour-price">@String.Format("{0:0,0 VNĐ}", Model.Gia)</span></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="tab-box">
+                    <ul id="listtab" class="listtab">
+                        <li>Thông tin đặt tour</li>
+                    </ul>
+                    @using (Html.BeginForm("BookTourAction", "Home", FormMethod.Post))
+                    {
+                        <div ng-app="myApp" ng-controller="myCtrl">
+                            <div class="main_booking">
+                                <h3 class="customer">Thông tin liên hệ</h3>
+                                <div class="form-group">
+                                    <label for="fullname" class="col-sm-2 control-label">Họ tên <span style="color:#ff0000">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="fullname" name="fullname">
+                                        <div id="z-fullname" class="error"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="col-sm-2 control-label">Địa chỉ <span style="color:#ff0000">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" name="address">
+                                        <div id="z-address" class="error"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="col-sm-2 control-label">Điện thoại <span style="color:#ff0000">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="phone" name="phone">
+                                        <div id="z-phone" class="error"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Email <span style="color:#ff0000">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email" name="email" style="font-size: 14px;">
+                                        <div id="z-email" class="error"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="diemdon" class="col-sm-2 control-label">Điểm đón</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="diemdon" name="diemdon">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notes" class="col-sm-2 control-label">Ghi chú</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" name="notes"></textarea>
+                                    </div>
+                                </div>
+                                <h3 class="info_tour_b">Thông tin đặt Tour</h3>
+                                <div class="form-cus form-group">
+                                    <label for="day">Tổng số khách</label><br>
+                                    <label class="select">Người lớn <span style="color:#ff0000">*</span></label>
+                                    <input type="number" class="form-control" ng-model="adults" id="adults" name="adults" style="font-size: 14px;" min="0" max="100">
+                                    <label class="select">Trẻ em</label>
+                                    <input type="number" class="form-control" ng-model="children" name="children" style="font-size: 14px;" min="0" max="200">
+                                    <label class="select">Em bé</label>
+                                    <input type="number" class="form-control" ng-model="baby" name="baby" style="font-size: 14px;" min="0" max="200">
+                                    
+                                </div>
+                                <h3 class="info_pay">
+                                    Tổng thanh toán:
+                                    <span id="total_payment" class="price" name="all_price">
+                                        {{adults*@Model.GiaNL + children*@Model.GiaTE + baby*@Model.GiaEB}}
+                                    </span>
+                                    <span>VNĐ</span>
+                                </h3>
+                                <h3 class="info_pay">Hình thức thanh toán</h3>
+                                <div class="form-cus form-group">
+                                    <label class="radio-inline" style="font-weight: bold;"><input id="ck" type="radio" name="payment" value="CK">Chuyển khoản</label>
+                                    <label class="radio-inline" style="font-weight: bold;"><input id="vp" type="radio" checked="checked" name="payment" value="VP">Tại văn phòng công ty</label>
+                                    <p style="text-align:center">&nbsp;</p>
+                                    <p style="text-align:center">&nbsp;</p>
+                                    <div id="vanphong">
+                                        <div class="width100">
+                                            <div class="module-content box-content">
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;"><strong>CÔNG TY TNHH MTV TUẤN NGUYỄN TRAVEL</strong></div>
+
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;">&nbsp;</div>
+                                                @foreach (var office in ViewBag.ListOffice)
+                                                {
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;"><span style="color:rgb(240, 110, 0)"><strong>@office.TenVP:</strong></span></div>
+
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;"><strong><img alt="" src="~/Content/Picture/icon-dia-diem.png" style="border:0px; box-sizing:border-box; height:20px; max-width:100%; vertical-align:middle; width:20px">&nbsp; Địa chỉ:&nbsp;</strong><span style="font-size:12px">@office.DiaChi;</span></div>
+
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;"><strong><img alt="" src="~/Content/Picture/icon-hotline-tuan-nguyen-travel.png" style="border:0px; box-sizing:border-box; float:left; height:20px; max-width:100%; vertical-align:middle; width:20px">&nbsp; Điện thoại:&nbsp;</strong>@office.SDT;</div>
+
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;"><img alt="" src="~/Content/Picture/icon-email-tuan-nguyen-travel.png" style="border:0px; box-sizing:border-box; height:auto !important; max-width:100%; vertical-align:middle">&nbsp;&nbsp;<strong>Email:</strong>&nbsp;@office.Email</div>
+
+                                                <div style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; color: rgb(55, 48, 42); font-family: Roboto, sans-serif; text-align: justify;">&nbsp;</div>
+                                                }
+                                            </div><!--box-content-->
+                                        </div><!--End Box Item-->
+
+                                    </div>
+                                    <div id="chuyenkhoan" style="display: none;">
+                                        <div class="width100">
+                                            <div class="module-content box-content">
+                                                <p>&nbsp;</p>
+
+                                                <p><span style="font-size:12px"><span style="color:#000000">- Trong Trường hợp&nbsp;quý&nbsp;khách&nbsp;lấy&nbsp;hóa&nbsp;đơn GTGT, vui lòng&nbsp;đóng&nbsp;thêm 10% thuế&nbsp;VAT và&nbsp;CK theo tài khoản sau :&nbsp;</span></span></p>
+
+                                                <table border="1" cellpadding="0" cellspacing="0" style="line-height:20.8px; width:100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="height:38px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>SỐ TÀI KHOẢN</strong></span></span></p>
+                                                            </td>
+                                                            <td style="height:38px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>TÊN TÀI KHOẢN</strong></span></span></p>
+                                                            </td>
+                                                            <td style="height:38px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>TÊN NGÂN HÀNG</strong></span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:31px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">0041 000 158 603</span></span></p>
+                                                            </td>
+                                                            <td style="height:31px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">CÔNG TY&nbsp;TNHH MTV TUẤN &nbsp;NGUYỄN TRAVEL</span></span></p>
+                                                            </td>
+                                                            <td style="height:31px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">VIETCOMBANK – ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <p>&nbsp;</p>
+
+                                                <p><span style="font-size:12px"><span style="color:#000000">- Hoặc không lấy hóa&nbsp;đơn GTGT:&nbsp;</span></span></p>
+
+                                                <table border="1" cellpadding="0" cellspacing="0" style="line-height:20.8px; width:100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>SỐ TÀI KHOẢN&nbsp;</strong></span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>TÊN TÀI KHOẢN</strong></span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000"><strong>TÊN NGÂN HÀNG</strong></span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">0041 000 158 604</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">VIETCOMBANK – ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px">1040 0294 2730</span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">VIETTINBANK – ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">5601 0000 8873 57</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">BIDV-&nbsp; ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">1903 0184 1400 11</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">TECHCOMBANK – ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">9704 3206 1008 4081</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">VP BANK – HÀ NỘI</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; width:188px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">2011 206 015 434</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:274px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; width:246px">
+                                                                <p style="text-align:center"><span style="font-size:12px"><span style="color:#000000">AGRIBANK – ĐÀ NẴNG</span></span></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; text-align:center; width:188px"><span style="font-size:12px"><span style="color:#000000">0400 5334 0506</span></span></td>
+                                                            <td style="height:29px; text-align:center; width:274px">
+                                                                <p><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; text-align:center; width:246px"><span style="font-size:12px"><span style="color:#000000">SACOMBANK ĐÀ NẴNG</span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:29px; text-align:center; width:188px"><span style="font-size:12px"><span style="color:#000000">010 8382 810</span></span></td>
+                                                            <td style="height:29px; text-align:center; width:274px">
+                                                                <p><span style="font-size:12px"><span style="color:#000000">NGUYỄN THỊ PHƯƠNG THU</span></span></p>
+                                                            </td>
+                                                            <td style="height:29px; text-align:center; width:246px"><span style="font-size:12px"><span style="color:#000000">ĐÔNG Á BANK ĐÀ NẴNG</span></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <p>&nbsp;</p>
+
+                                            </div><!--box-content-->
+                                        </div><!--End Box Item-->
+
+                                    </div>
+                                </div>
+                                <!--<input type="hidden" name="payment" id="payment_id" value="VP"> -->
+                                <input type="hidden" name="tour_id" value=@Model.idTour>
+                                <div class="btn_tour" style="text-align:center">
+                                    <button type="submit" class="btn_dattour" onclick="return ConfimBookTour()">Đặt tour</button>
+                                </div>
+                                <p style="text-align:center">&nbsp;</p>
+                                <p style="text-align:center">&nbsp;</p>
+                            </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+</style>
+<script>
+    function ConfimBookTour() {
+
+        var data = new Array();
+        data[0] = document.getElementById('fullname').value;
+        data[1] = document.getElementById('address').value;
+        data[2] = document.getElementById('phone').value;
+        data[3] = document.getElementById('email').value;
+        var myerror = new Array();
+        myerror[0] = "Bạn chưa nhập họ tên";
+        myerror[1] = "Bạn chưa nhập địa chỉ";
+        myerror[2] = "Bạn chưa nhập số điện thoại";
+        myerror[3] = "Bạn chưa nhập email";
+        var iddata = new Array("fullname", "address", "phone", "email")
+        var nearby = new Array("z-fullname", "z-address", "z-phone", "z-email");
+        var n = 0;
+        for (i in data) {
+            var error = myerror[i];
+            var div = nearby[i];
+            var id = iddata[i];
+            if (data[i] == "") {
+                document.getElementById(div).innerHTML = error;
+                document.getElementById(id).focus();
+                n++;
+            }
+            else {
+                document.getElementById(div).innerHTML = "";
+            }
+        }
+        if (n == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    $(document).ready(function () {
+
+        //Thanh toán
+        $("#ck").click(function () {
+            $("#chuyenkhoan").show();
+            $("#vanphong").hide();
+        });
+        $("#vp").click(function () {
+            $("#vanphong").show();
+            $("#chuyenkhoan").hide();
+        });
+    });
+    //function ConfimBookTour() {
+    //    alert("Bạn đã đặt Tour thành công!!!");
+    //}
+</script>
+<style>
+    .form-cus .form-control {
+        display: inline-block;
+        width: auto;
+        min-width: 83px;
+        vertical-align: middle;
+    }
+    .form-cus label.select {
+        margin: 0 10px 0 10px;
+        font-weight: 100;
+        width: 80px;
+        text-align: right;
+    }
+</style>

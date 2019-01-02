@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lí Văn Phòng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model IEnumerable<Travel.Models.Entities.VanPhong>
+<h3>Danh sách văn phòng</h3>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemVanPhong">Thêm văn phòng mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <table class="table">
+        <tr>
+            <th class="col-md-1">
+                @Html.DisplayName("Mã VP")
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayName("Văn phòng")
+            </th>
+            <th class="col-md-4">
+                @Html.DisplayName("Địa chỉ")
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayName("Số ĐT")
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayName("Email")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.idVP)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.TenVP)
+                </td>
+                <td class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "SuaVanPhong", new { id = item.idVP })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "XoaVanPhong", new { id = item.idVP }, new { onclick = "return ConfirmationDialog()" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div style="text-align:justify">&nbsp;</div>
+

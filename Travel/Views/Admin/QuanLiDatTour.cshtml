@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lí Đặt Tour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model IEnumerable<Travel.Models.DTO.BookTourDTO>
+<h3 style="text-transform: uppercase">@ViewBag.name</h3>
+<div class="tab-box">
+    <ul id="listtab" class="listtab">
+        <li href="javascript:;" data_id="all">Tất cả</li>
+        <li href="javascript:;" data_id="not_pay">Chưa thanh toán</li>
+        <li href="javascript:;" data_id="pay">Đã thanh toán</li>
+        <li class="active" href="javascript:;" data_id="list_customer">Danh sách khách hàng</li>
+    </ul>
+    <div id="show-tabs">
+        <div class="tabcon" id="all" >
+            <table class="table">
+                <tr>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Tên khách hàng")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("SĐT")
+                    </th>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Email")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Ngày đặt tour")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Tổng tiền")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Hình thức TT")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Đã thanh toán")
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td class="col-md-2">
+                        <a href="http://localhost:53953/Admin/ChiTietDatTour?idtour=@item.idTour&idkh=@item.idKH">
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </a>
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.NgayDatTour)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.TongTien) VNĐ
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.HinhThucTT)
+                    </td>
+                    <td class="col-md-1">
+                        @if (item.XacNhanTT == 1)
+                        {
+                            <span class="glyphicon glyphicon-ok" style="color:green;margin: 0 auto;"></span>
+                        }
+                        else
+                        {
+                            if (item.XacNhanTT == 0)
+                            {
+                                <span class="glyphicon glyphicon-remove" style="color:red;margin: 0 auto;"></span>
+                            }
+                        }
+                    </td>
+                </tr>
+                }
+            </table>
+            <p style="text-align:center">&nbsp;</p>
+        </div>
+        <div class="tabcon" id="not_pay">
+            <table class="table">
+                <tr>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Tên khách hàng")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("SĐT")
+                    </th>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Email")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Ngày đặt tour")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Tổng tiền")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Hình thức TT")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Đã thanh toán")
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.XacNhanTT == 0)
+                    {
+                <tr>
+                    <td class="col-md-2">
+                        <a href="http://localhost:53953/Admin/ChiTietDatTour?idtour=@item.idTour&idkh=@item.idKH">
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </a>
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.NgayDatTour)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.TongTien) VNĐ
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.HinhThucTT)
+                    </td>
+                    <td class="col-md-1">
+                        <span class="glyphicon glyphicon-remove" style="color:red;margin: 0 auto;"></span>
+                    </td>
+                </tr>
+                    }
+                }
+            </table>
+            <p style="text-align:center">&nbsp;</p>
+        </div>
+        <div class="tabcon" id="pay">
+            <table class="table">
+                <tr>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Tên khách hàng")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("SĐT")
+                    </th>
+                    <th class="col-md-2">
+                        @Html.DisplayName("Email")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Ngày thanh toán")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Tổng tiền")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Hình thức TT")
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayName("Đã thanh toán")
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.XacNhanTT == 1)
+                    {
+                <tr>
+                    <td class="col-md-2">
+                        <a href="http://localhost:53953/Admin/ChiTietDatTour?idtour=@item.idTour&idkh=@item.idKH">
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </a>
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.NgayTT)
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.TongTien) VNĐ
+                    </td>
+                    <td class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.HinhThucTT)
+                    </td>
+                    <td class="col-md-1">
+                        <span class="glyphicon glyphicon-ok" style="color:green;margin: 0 auto;"></span>
+                    </td>
+                </tr>
+                    }
+                }
+            </table>
+            <p style="text-align:center">&nbsp;</p>
+        </div>
+        <div class="tabcon" id="list_customer" style="display:block">
+            @Html.Action("DSKH", new { id = ViewBag.id })
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div style="text-align:justify">&nbsp;</div>
+<div style="text-align:justify">&nbsp;</div>
+<div>
+    <a href="#" onclick="back()">Quay lại trang trước</a>
+</div>
+<div style="text-align:justify">&nbsp;</div>

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Quản Lí Nhân Viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model IEnumerable<Travel.Models.Entities.NhanVienHoTro>
+@using PagedList.Mvc;
+<h3>Danh sách nhân viên hỗ trợ</h3>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemNhanVien">Thêm nhân viên mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-1"></th>
+        <th class="col-md-1">
+            @Html.DisplayName("Mã NV")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Tên nhân viên")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Chức danh")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Số điện thoại")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Chức vụ")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-1">
+                <img src="@item.Anh" style="width:100px;height:80px;" />
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.idNV)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.TenNV)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.ChucDanh)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.ViTri)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "SuaNhanVien", new { id = item.idNV })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "XoaNhanVien", new { id = item.idNV }, new { onclick = "return ConfirmationDialog()" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div style="text-align:justify">&nbsp;</div>
+

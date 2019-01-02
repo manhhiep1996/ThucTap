@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Quản lí tour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model PagedList.IPagedList<Travel.Models.DTO.TourDTO>
+@using PagedList.Mvc;
+<h3>Danh sách Tour</h3>
+<div class="panel-body">
+    @using (Html.BeginForm("Search", "Admin", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-md-2">
+                    <a type="button" class="btn btn-primary" href="/Admin/ThemTour">Thêm tour mới</a>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="searchString" placeholder="Tìm kiếm" value="" />
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" name="ngaydi">
+                        <option value="0">Số ngày đi tour</option>
+                        <option value="1 ngày">1 ngày</option>
+                        <option value="2 ngày 1 đêm">2 ngày 1 đêm</option>
+                        <option value="3 ngày 2 đêm">3 ngày 2 đêm</option>
+                        <option value="4 ngày 3 đêm">4 ngày 3 đêm</option>
+                        <option value="5 ngày 4 đêm">5 ngày 4 đêm</option>
+                        <option value="6 ngày 5 đêm">6 ngày 5 đêm</option>
+                        <option value="7 ngày 6 đêm">7 ngày 6 đêm</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" name="gia">
+                        <option value="0">Giá</option>
+                        <option value="1000000">Từ 0 đến 1 triệu</option>
+                        <option value="2000000">Từ 1 đến 2 triệu</option>
+                        <option value="3000000">Từ 2 đến 3 triệu</option>
+                        <option value="4000000">Từ 3 đến 4 triệu</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-success"> Tìm kiếm</button>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-1"></th>
+        <th class="col-md-1">
+            @Html.DisplayName("Mã tour")
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayName("Tên tour")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Ngày khởi hành")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Giá chung")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Khuyến mãi")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Số lượt đặt tour")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Số người tối đa")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td class="col-md-1">
+            <img src="@item.Anh" style="width:100px;height:80px;" />
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.idTour)
+        </td>
+        <td class="col-md-3">
+            <a title=@item.TenTour href="http://localhost:53953/Admin/QuanLiDatTour?id=@item.idTour">
+                @Html.DisplayFor(modelItem => item.TenTour)
+            </a>
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.Gia)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.KhuyenMai) %
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.LuotDatTour)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.SoNguoi)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "SuaTour", new { id = item.idTour })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "XoaTour", new { id = item.idTour }, new { onclick = "return ConfirmationDialog()" })
+        </td>
+    </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("QuanLiTour", new { page, @searchString = @ViewBag.SearchString }))
+<div style="text-align:justify">&nbsp;</div>

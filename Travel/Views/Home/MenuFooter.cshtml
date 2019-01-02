@@ -1,0 +1,28 @@
+﻿<div class="main">
+    <div class="menu-footer">
+        @foreach (var item in Model)
+        {
+            if (item.TenMenuCha == "Không")
+            {
+                foreach (var item1 in Model)
+                {
+                    if (item1.idMenuCha == item.idMenu && (item1.TenMenu == "Tour miền Bắc" || item1.TenMenu == "Tour miền Nam" || item1.TenMenu == "Tour miền Trung"))
+                    {
+                        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-12">
+                            <h4>@item1.TenMenu</h4>
+                            <ul>
+                                @foreach (var item2 in Model)
+                                {
+                                    if (item2.idMenuCha == item1.idMenu)
+                                    {
+                                        <li><a href="http://localhost:53953/Home/Index?id=@item2.idMenu">@item2.TenMenu </a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+            }
+        }   
+        </div>
+</div>

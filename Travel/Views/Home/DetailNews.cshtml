@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = Model.TenND;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div style="max-width:1100px;margin: 0 auto;">
+        @Html.Action("LeftMenu")
+        <div class="col-lg-9 col-md-9">
+            <div class="main-box">
+                <h1 class="heading">@Model.TenND</h1>
+                <h2 class="introtext" style="font-size:14px;">@Html.Raw(Model.MoTa)</h2>
+                <div class="fulltext">
+                    @Html.Raw(Model.NoiDung)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@*@model IEnumerable<Travel.Models.DTO.MenuDTO>*@
+    @foreach (var item in Model)
+    {
+        if (item.idMenuCha == 1003)
+        {
+            int i = 0;
+            foreach (var items in Model)
+            {
+                if (items.idMenuCha == item.idMenu)
+                {
+                    i = 1;
+                    break;
+                }
+            }
+            if(i == 0)
+            {
+                <li>
+                    <a href="http://localhost:53953/Home/Index?id=@item.idMenu">
+                        <span>@item.TenMenu</span>
+                    </a>
+                </li>
+            }
+            if (i == 1)
+            {
+                <li class="dropdown">
+                    <a href="http://localhost:53953/Home/Index?id=@item.idMenu">
+                        <span>@item.TenMenu</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach (var items in Model)
+                        {
+                            if (items.idMenuCha == item.idMenu)
+                            {
+                                <li><a href="http://localhost:53953/Home/Index?id=@items.idMenu">@items.TenMenu</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    }

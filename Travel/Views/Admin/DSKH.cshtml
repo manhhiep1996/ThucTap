@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<Travel.Models.Entities.DSKH>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-2">
+                <a type="button" class="btn btn-primary" href="/Admin/ThemDSKH?id=@ViewBag.id">Thêm khách hàng</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-1">
+            @Html.DisplayName("STT")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Tên khách hàng")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Giới tính")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Năm sinh")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("SĐT")
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayName("Địa chỉ")
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayName("Điểm đón")
+        </th>
+        <th></th>
+    </tr>
+    @{ 
+        int i = 0;
+    }
+    @foreach (var item in Model)
+    {
+        i++;
+    <tr>
+        <td class="col-md-1">
+            @i
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.NamSinh)
+        </td>
+        <td class="col-md-1">
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.DiemDon)
+        </td>
+        <td class="col-md-1">
+            @Html.ActionLink("Sửa", "SuaDSKH", new { id = item.idKH })&nbsp;|&nbsp;@Html.ActionLink("Xóa", "DeleteCustomer", new { id = item.idKH }, new { onclick = "return ConfirmationDialog()" })
+        </td>
+    </tr>
+    }
+</table>
+<p style="text-align:center">&nbsp;</p>

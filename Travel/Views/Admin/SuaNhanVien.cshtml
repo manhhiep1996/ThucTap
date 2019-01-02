@@ -1,0 +1,75 @@
+﻿@model Travel.Models.Entities.NhanVienHoTro
+
+@{
+    ViewBag.Title = "Sửa thông tin nhân viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Sửa thông tin nhân viên</h2>
+
+@using (Html.BeginForm("EditEmployee", "Admin"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Sửa thông tin</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idNV)
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.Label("Tên nhân viên")
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.Label("Chức danh")
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.ChucDanh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChucDanh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.Label("SĐT")
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.Label("Chức vụ")
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.ViTri, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ViTri, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.Label("Ảnh")
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @type = "file", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu thông tin" class="btn btn-default" onclick="return confirmEdit()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "QuanLiNhanVien")
+</div>
+<div style="text-align:justify">&nbsp;</div>

@@ -1,0 +1,24 @@
+﻿
+<div class="main">
+    <div style="max-width:1100px;margin: 0 auto;">
+        @{ Html.RenderPartial("LeftMenu");}
+        <div class="col-lg-9 col-md-9">
+            <h2 class="heading">Tin tức</h2>
+            <div class="width100">
+                @foreach (var item in Model.ListContentId)
+                {
+                    <div class="news-box">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"><a href="http://localhost:53953/Home/DetailNews?id=@item.idND"><img src=@item.Anh style="border: 1px solid #ccc;padding: 3px;" width="100%"></a></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <h3 style="font-size: 1.2em;font-weight: bold;margin-bottom: 5px;"><a title=@item.TenND href="http://localhost:53953/Home/DetailNews?id=@item.idND">@item.TenND</a></h3>
+                            <div style="text-align: justify;margin-bottom: 5px;">@Html.Raw(item.MoTa)</div>
+                            <div class="pull-right"><a href="http://localhost:53953/Home/DetailNews?id=@item.idND" style="color: #f06e00;">Chi tiết...</a></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
